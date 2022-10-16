@@ -116,10 +116,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\algorithms.cpp" />
+    <ClCompile Include="src\blocks.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Algorithms.hpp" />
+    <ClInclude Include="include\Blocks.hpp" />
     <ClInclude Include="include\Game.hpp" />
     <ClInclude Include="include\sfml\Audio.hpp" />
     <ClInclude Include="include\sfml\audio\AlResource.hpp" />

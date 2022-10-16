@@ -1,9 +1,7 @@
 #define _CRTDBG_MAP_ALLOC
-#include <iostream>
-#include <vector>
-#include <SFML/Graphics.hpp>
-
 #include "Game.hpp"
+#include "Algorithms.hpp"
+#include "Blocks.hpp"
 
 Game::Game(char* title)
 {
@@ -13,19 +11,24 @@ Game::Game(char* title)
 	this->window = new sf::RenderWindow(v_mode, title, sf::Style::Titlebar | sf::Style::Close);
 	this->window->setFramerateLimit(60);
 
-	// INIT THE BLOCKS
-	int numOfBlocks = 265;
-	float heightOfBlocks = 5.0f;
-	float widthOfBlocks = 2.0f;
-	float blockGaps = 1.0f;
-	for(int i = 0; i < numOfBlocks; i++)
+	// SET VARIABLES
+	const int numBlocks = 200;
+
+	// CREATE BLOCK OBJECT
+	//Blocks blocks();
+	float heightOfBlocks = 4.0f;
+	float widthOfBlocks = 4.0f;
+	for(int i = 0; i < numBlocks; i++)
 	{
-		int newheightOfBlocks = heightOfBlocks + i * 1.8;
+		int newheightOfBlocks = heightOfBlocks + i * 2.0f;
 		this->blocks[this->iblocks].setSize(sf::Vector2f(widthOfBlocks, newheightOfBlocks));
-		this->blocks[this->iblocks].setPosition((widthOfBlocks + blockGaps) * i, this->window->getSize().y - newheightOfBlocks);
+		this->blocks[this->iblocks].setPosition((widthOfBlocks) * i, this->window->getSize().y - newheightOfBlocks);
 		this->blocks[this->iblocks].setFillColor(sf::Color::White);
 		this->iblocks++;
 	}
+
+	// CREATE ALGORITHM OBJECT
+	//Algorithms alg();
 
 }
 
