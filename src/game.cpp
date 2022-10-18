@@ -40,15 +40,16 @@ Game::~Game()
 void Game::handleEvents()
 {
 	while (this->window->pollEvent(this->ev))
-	{
-		if (this->ev.type == sf::Event::Closed)
-			this->window->close();
-
-		else if (this->ev.type == sf::Event::KeyPressed)
-			if (this->ev.key.code == sf::Keyboard::Escape)
+		switch (this->ev.type)
+		{
+			case sf::Event::Closed:
 				this->window->close();
-	}
-
+			case sf::Event::KeyPressed:
+				if (this->ev.key.code == sf::Keyboard::Escape)
+					this->window->close();
+				else if(this->ev.key.code == sf::Keyboard::BackSpace)
+					this->window->close();
+		}			
 }
 
 void Game::update()

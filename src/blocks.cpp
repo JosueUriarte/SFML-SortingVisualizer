@@ -1,5 +1,5 @@
 #include "Blocks.hpp"
 
-Blocks::Blocks() {
-
+Blocks::Blocks(int numBlocks) {
+	num_blocks = numBlocks;
 }

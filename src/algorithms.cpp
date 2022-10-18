@@ -1,7 +1,9 @@
 #include "Algorithms.hpp"
 
-Algorithms::Algorithms(int blocks) {
-
+Algorithms::Algorithms(Blocks& blocks) {
+	working = false;
+	sorted = false;
+	selectedAlg = 0;
 }
 
 void Algorithms::start() {

@@ -5,7 +5,7 @@
 class Algorithms {
 public:
 	// Constructor
-	Algorithms(int blocks);
+	Algorithms(Blocks& blocks);
 
 	// Controllers
 	void start();

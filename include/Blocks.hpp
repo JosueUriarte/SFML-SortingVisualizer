@@ -3,6 +3,9 @@
 class Blocks {
 public:
 	// Constructor
-	Blocks();
+	Blocks(int numBlocks);
+
+	// Variables
+	int num_blocks;
 private:
 };
