@@ -7,7 +7,7 @@
 Game::Game(char* title)
 {
 	// CREATE WINDOW
-	this->v_mode.height = 480;
+	this->v_mode.height = 800;
 	this->v_mode.width = 800;
 	this->window = new sf::RenderWindow(v_mode, title, sf::Style::Titlebar | sf::Style::Close);
 	this->window->setFramerateLimit(60);
@@ -16,7 +16,7 @@ Game::Game(char* title)
 	const int numBlocks = 200;
 
 	// CREATE BLOCK OBJECT
-	blocks = new Blocks(numBlocks, 480, 800);
+	blocks = new Blocks(numBlocks, this->v_mode.height, this->v_mode.width);
 
 	// CREATE ALGORITHM OBJECT
 	alg = new Algorithms(*blocks);
@@ -25,7 +25,13 @@ Game::Game(char* title)
 
 Game::~Game()
 {
+	delete this->blocks;
+	delete this->alg;
 	delete this->window;
+}
+
+void Game::update() {
+
 }
 
 void Game::handleEvents()
@@ -36,18 +42,27 @@ void Game::handleEvents()
 			case sf::Event::Closed:
 				this->window->close();
 			case sf::Event::KeyPressed:
-				if (this->ev.key.code == sf::Keyboard::Escape) {
-					this->alg->stop(); this->window->close();
+
+				switch (this->ev.key.code)
+				{
+					case sf::Keyboard::Escape:
+						this->alg->stop();
+						this->window->close(); break;
+
+					case sf::Keyboard::BackSpace:
+						this->alg->stop();
+						this->window->close(); break;
+
+					case sf::Keyboard::LShift:
+						this->alg->setAlg(0); break;
+
+					case sf::Keyboard::I:
+						this->alg->setAlg(1); break;
+
+					case sf::Keyboard::Space:
+						this->alg->start(); break;
 				}
-				else if (this->ev.key.code == sf::Keyboard::BackSpace) {
-					this->alg->stop(); this->window->close();
-				}
-				else if (this->ev.key.code == sf::Keyboard::LShift)
-					this->alg->setAlg(0);
-				else if (this->ev.key.code == sf::Keyboard::I)
-					this->alg->setAlg(1);
-				else if (this->ev.key.code == sf::Keyboard::Space)
-					this->alg->start();
+					
 		}			
 }
 

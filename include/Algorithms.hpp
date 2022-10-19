@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include <algorithm>
+#include <thread>
+
 #include "Blocks.hpp"
 
 class Algorithms {
@@ -22,11 +25,15 @@ public:
 	// Getters
 	std::string getAlg();			// Get the current algorithm name
 
+	// Thread Function
+	void algo();
+
 private:
 	// Data
 	Blocks& blocks;
-
 	const std::vector<std::string> algList = { "shuffle", "insertionSort" };
+
+	std::thread sortingThread;
 
 	// Sorting algorithms
 	void shuffle();

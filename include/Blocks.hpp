@@ -12,6 +12,7 @@ public:
 	// Data
 	std::vector<sf::RectangleShape> blockData;
 	std::vector<sf::Color> blockColors;
+	std::vector<int> blockSize;
 
 	// Variables
 	int num_blocks;
