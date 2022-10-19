@@ -5,7 +5,7 @@
 class Algorithms {
 public:
 	// Constructor
-	Algorithms(Blocks& blocks);
+	Algorithms(Blocks& _blocks);
 
 	// Controllers
 	void start();
@@ -17,8 +17,18 @@ public:
 	int selectedAlg;
 
 	// Setters
-	void setAlg(int algnumber);
+	void setAlg(int algnumber);		// Set the algorithm to use
 
 	// Getters
-	std::string getAlg();
+	std::string getAlg();			// Get the current algorithm name
+
+private:
+	// Data
+	Blocks& blocks;
+
+	const std::vector<std::string> algList = { "shuffle", "insertionSort" };
+
+	// Sorting algorithms
+	void shuffle();
+	void insertionSort();
 };

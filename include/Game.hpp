@@ -1,8 +1,11 @@
 #pragma once
-#include <iostream>
-#include <vector>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <iostream>
+#include <vector>
+
+#include <Algorithms.hpp>
+#include <Blocks.hpp>
 
 class Game
 {
@@ -12,7 +15,7 @@ public:
 	~Game();
 
 	// Game Objects
-	sf::RectangleShape blocks[1000];
+	//sf::RectangleShape blocks[1000];
 
 	// Functions
 	void update();
@@ -25,6 +28,8 @@ public:
 private:
 	int iblocks = 0;
 	float dx = 2.0f, dy = 4.0f;
+	Algorithms* alg;
+	Blocks* blocks;
 	sf::RenderWindow* window = nullptr;
 	sf::VideoMode v_mode;
 	sf::Event ev;

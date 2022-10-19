@@ -1,4 +1,5 @@
 #define _CRTDBG_MAP_ALLOC
+
 #include "Game.hpp"
 #include "Algorithms.hpp"
 #include "Blocks.hpp"
@@ -15,20 +16,10 @@ Game::Game(char* title)
 	const int numBlocks = 200;
 
 	// CREATE BLOCK OBJECT
-	//Blocks blocks();
-	float heightOfBlocks = 4.0f;
-	float widthOfBlocks = 4.0f;
-	for(int i = 0; i < numBlocks; i++)
-	{
-		int newheightOfBlocks = heightOfBlocks + i * 2.0f;
-		this->blocks[this->iblocks].setSize(sf::Vector2f(widthOfBlocks, newheightOfBlocks));
-		this->blocks[this->iblocks].setPosition((widthOfBlocks) * i, this->window->getSize().y - newheightOfBlocks);
-		this->blocks[this->iblocks].setFillColor(sf::Color::White);
-		this->iblocks++;
-	}
+	blocks = new Blocks(numBlocks, 480, 800);
 
 	// CREATE ALGORITHM OBJECT
-	//Algorithms alg();
+	alg = new Algorithms(*blocks);
 
 }
 
@@ -45,25 +36,24 @@ void Game::handleEvents()
 			case sf::Event::Closed:
 				this->window->close();
 			case sf::Event::KeyPressed:
-				if (this->ev.key.code == sf::Keyboard::Escape)
-					this->window->close();
-				else if(this->ev.key.code == sf::Keyboard::BackSpace)
-					this->window->close();
+				if (this->ev.key.code == sf::Keyboard::Escape) {
+					this->alg->stop(); this->window->close();
+				}
+				else if (this->ev.key.code == sf::Keyboard::BackSpace) {
+					this->alg->stop(); this->window->close();
+				}
+				else if (this->ev.key.code == sf::Keyboard::LShift)
+					this->alg->setAlg(0);
+				else if (this->ev.key.code == sf::Keyboard::I)
+					this->alg->setAlg(1);
+				else if (this->ev.key.code == sf::Keyboard::Space)
+					this->alg->start();
 		}			
-}
-
-void Game::update()
-{
 }
 
 void Game::render()
 {
 	this->window->clear();
-
-	for (int i = 0; i < this->iblocks; i++)
-	{
-		this->window->draw(this->blocks[i]);
-	}
-
+	this->blocks->render(this->window);
 	this->window->display();
 }
