@@ -2,7 +2,7 @@
 
 Algorithms::Algorithms(Blocks& _blocks):blocks(_blocks) {
 	working = false;
-	sorted = false;
+	sorted = true;
 	selectedAlg = 0;
 }
 
@@ -34,19 +34,16 @@ void Algorithms::algo() {
 	{
 	case 0:
 		Algorithms::shuffle();
-		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 		break;
 	case 1:
 		Algorithms::insertionSort();
 		break;
 	}
-
 	std::cout << "FINISHED THREAD...." << std::endl;
-	this->sortingThread.detach();
 	working = false;
 }
 
-// ALGORITHMS --------------------------------------------------
+// ALGORITHMS //////////////////////////////////////////////////////////
 
 // SHUFFLE -----------------------------------------------------
 void Algorithms::shuffle() {
@@ -54,6 +51,16 @@ void Algorithms::shuffle() {
 	sorted = false;
 }
 
+// INSERTION SORT ----------------------------------------------
 void Algorithms::insertionSort() {
+	for (int i = 1;i < this->blocks.num_blocks;++i) {
+		int curr = this->blocks[i];
+		int prev = i - 1;
 
+		while (prev >= 0 && curr < this->blocks[prev]) {
+			this->blocks(prev + 1, this->blocks[prev]);
+			--prev;
+		}
+		this->blocks(prev + 1, curr);
+	}
 }

@@ -37,33 +37,42 @@ void Game::update() {
 void Game::handleEvents()
 {
 	while (this->window->pollEvent(this->ev))
+	{
 		switch (this->ev.type)
 		{
-			case sf::Event::Closed:
+		case sf::Event::Closed:
+			//this->alg->stop();
+			this->window->close();
+			break;
+		case sf::Event::KeyPressed:
+			switch (this->ev.key.code)
+			{
+			case sf::Keyboard::Escape:
+				//this->alg->stop();
 				this->window->close();
-			case sf::Event::KeyPressed:
+				break;
 
-				switch (this->ev.key.code)
-				{
-					case sf::Keyboard::Escape:
-						this->alg->stop();
-						this->window->close(); break;
+			case sf::Keyboard::BackSpace:
+				//this->alg->stop();
+				this->window->close();
+				break;
 
-					case sf::Keyboard::BackSpace:
-						this->alg->stop();
-						this->window->close(); break;
+			case sf::Keyboard::LShift:
+				this->alg->setAlg(0);
+				break;
 
-					case sf::Keyboard::LShift:
-						this->alg->setAlg(0); break;
+			case sf::Keyboard::I:
+				this->alg->setAlg(1);
+				break;
 
-					case sf::Keyboard::I:
-						this->alg->setAlg(1); break;
+			case sf::Keyboard::Space:
+				this->alg->start();
+				break;
+			}
+			break;
 
-					case sf::Keyboard::Space:
-						this->alg->start(); break;
-				}
-					
-		}			
+		}
+	}		
 }
 
 void Game::render()

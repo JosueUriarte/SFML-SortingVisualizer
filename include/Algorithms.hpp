@@ -8,7 +8,7 @@
 class Algorithms {
 public:
 	// Constructor
-	Algorithms(Blocks& _blocks);
+	Algorithms(Blocks&);
 
 	// Controllers
 	void start();
@@ -31,7 +31,7 @@ public:
 private:
 	// Data
 	Blocks& blocks;
-	const std::vector<std::string> algList = { "shuffle", "insertionSort" };
+	const std::vector<std::string> algList = { "shuffle", "insertionSort"};
 
 	std::thread sortingThread;
 
