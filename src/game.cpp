@@ -65,6 +65,10 @@ void Game::handleEvents()
 				this->alg->setAlg(1);
 				break;
 
+			case sf::Keyboard::S:
+				this->alg->setAlg(2);
+				break;
+
 			case sf::Keyboard::Space:
 				this->alg->start();
 				break;

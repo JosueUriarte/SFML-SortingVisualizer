@@ -52,7 +52,7 @@ int Blocks::operator[](int i) {
 		return 0;
 	}
 	int b_val = this->blockSize[i];
-	std::this_thread::sleep_for(std::chrono::microseconds(1));		// Pause to "read" value
+	std::this_thread::sleep_for(std::chrono::nanoseconds(500));		// Pause to "read" value
 	return b_val;
 }
 
@@ -61,6 +61,6 @@ void Blocks::operator()(int dest, int val) {
 		std::cout << "OUT OF BOUNDS VALUE OPERATOR(): " << dest << std::endl;
 		return;
 	}
-	std::this_thread::sleep_for(std::chrono::microseconds(1));		// Pause to "write" value
+	std::this_thread::sleep_for(std::chrono::nanoseconds(500));		// Pause to "write" value
 	this->blockSize[dest] = val;
 }

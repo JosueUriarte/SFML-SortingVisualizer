@@ -31,11 +31,13 @@ public:
 private:
 	// Data
 	Blocks& blocks;
-	const std::vector<std::string> algList = { "shuffle", "insertionSort"};
+	const std::vector<std::string> algList = 
+	{ "shuffle", "insertionSort", "selectionSort"};
 
 	std::thread sortingThread;
 
 	// Sorting algorithms
 	void shuffle();
 	void insertionSort();
+	void selectionSort();
 };
