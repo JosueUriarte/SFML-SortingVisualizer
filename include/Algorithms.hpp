@@ -33,7 +33,7 @@ private:
 	Blocks& blocks;
 	const std::vector<std::string> algList = 
 	{ "shuffle", "insertionSort", "selectionSort", "bubbleSort",
-		"shellSort"};
+		"shellSort", "gnomeSort", "cocktailSort"};
 
 	std::thread sortingThread;
 
@@ -43,4 +43,6 @@ private:
 	void selectionSort();
 	void bubbleSort();
 	void shellSort();
+	void gnomeSort();
+	void cocktailSort();
 };

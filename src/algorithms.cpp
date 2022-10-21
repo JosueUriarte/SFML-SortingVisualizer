@@ -49,6 +49,12 @@ void Algorithms::algo() {
 	case 4:
 		Algorithms::shellSort();
 		break;
+	case 5:
+		Algorithms::gnomeSort();
+		break;
+	case 6:
+		Algorithms::cocktailSort();
+		break;
 	}
 	std::cout << "FINISHED THREAD...." << std::endl;
 	working = false;
@@ -113,6 +119,57 @@ void Algorithms::shellSort() {
 		}
 	}
 }
+
+// GNOME SORT ---------------------------------------------------
+void Algorithms::gnomeSort() {
+	int idx = 0;
+
+	while (idx < this->blocks.num_blocks)
+	{
+		if (idx == 0) idx++;
+		if (this->blocks[idx] >= this->blocks[idx - 1]) idx++;
+		else {
+			this->blocks.block_swap(idx, idx - 1);
+			idx--;
+		}
+	}
+}
+
+// COCKTAIL SORT (LOOKS LIKE A COCKTAIL LOL) --------------------
+void Algorithms::cocktailSort() {
+	bool swapped = true;
+	int start = 0;
+	int end = this->blocks.num_blocks - 1;
+
+	while (swapped)
+	{
+		swapped = false;
+		for (int i = start; i < end; ++i)
+		{
+			if (this->blocks.cmp(i, i + 1) == 1)
+			{
+				this->blocks.block_swap(i, i + 1);
+				swapped = true;
+			}
+		}
+
+		if (!swapped) break;
+		swapped = false;
+		--end;
+
+		for (int i = end - 1; i >= start; --i)
+		{
+			if (this->blocks.cmp(i, i + 1) == 1)
+			{
+				this->blocks.block_swap(i, i + 1);
+				swapped = true;
+			}
+		}
+
+		++start;
+	}
+}
+
 // QUICK SORT ---------------------------------------------------
 
 // MERGE SORT ---------------------------------------------------
