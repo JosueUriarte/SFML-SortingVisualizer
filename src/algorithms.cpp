@@ -20,7 +20,9 @@ void Algorithms::stop() {
 }
 
 void Algorithms::setAlg(int algNum) {
-	selectedAlg = algNum;
+	if (algNum == -1) selectedAlg = (selectedAlg + 1) % algList.size();
+	else if (algNum == -2) (selectedAlg + algList.size() - 1) % algList.size();
+	else selectedAlg = algNum;
 	std::cout << "ALGORITHM SELECTED: " << this->getAlg() << std::endl;
 }
 
@@ -41,6 +43,12 @@ void Algorithms::algo() {
 	case 2:
 		Algorithms::selectionSort();
 		break;
+	case 3:
+		Algorithms::bubbleSort();
+		break;
+	case 4:
+		Algorithms::shellSort();
+		break;
 	}
 	std::cout << "FINISHED THREAD...." << std::endl;
 	working = false;
@@ -56,11 +64,8 @@ void Algorithms::shuffle() {
 
 // INSERTION SORT ----------------------------------------------
 void Algorithms::insertionSort() {
-
-	
-	for (int i = 1;i < this->blocks.num_blocks;i++) { // Start from index after first element
-
-		
+	for (int i = 1;i < this->blocks.num_blocks;i++) // Start from index after first element
+	{ 
 		int curr = this->blocks[i]; // Get the current element
 		int prev = i - 1;			// Get the previous index
 		// While previous is not out of bounds &&
@@ -86,11 +91,29 @@ void Algorithms::selectionSort() {
 	}
 }
 
-// QUICK SORT ---------------------------------------------------
-
 // BUBBLE SORT --------------------------------------------------
+void Algorithms::bubbleSort() {
+	for(int i = 0; i < this->blocks.num_blocks - 1;i++)
+		for(int j = 0; j < this->blocks.num_blocks - i - 1;j++)
+			if(this->blocks.cmp(j, j+1) == 1)
+				this->blocks.block_swap(j, j+1);
+}
 
 // SHELL SORT ---------------------------------------------------
+void Algorithms::shellSort() {
+	for (int gap = this->blocks.num_blocks / 2; gap > 0; gap /= 2)
+	{
+		for (int i = gap; i < this->blocks.num_blocks;i += 1)
+		{
+			int temp = this->blocks[i];
+			int j;
+			for (j = i; j >= gap && this->blocks[j - gap] > temp; j -= gap)
+				this->blocks(j, this->blocks[j - gap]);
+			this->blocks(j, temp);
+		}
+	}
+}
+// QUICK SORT ---------------------------------------------------
 
 // MERGE SORT ---------------------------------------------------
 

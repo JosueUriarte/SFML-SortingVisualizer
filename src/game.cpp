@@ -57,6 +57,14 @@ void Game::handleEvents()
 				this->window->close();
 				break;
 
+			case sf::Keyboard::Up:
+				this->alg->setAlg(-1);
+				break;
+
+			case sf::Keyboard::Down:
+				this->alg->setAlg(-2);
+				break;
+
 			case sf::Keyboard::LShift:
 				this->alg->setAlg(0);
 				break;
@@ -67,6 +75,10 @@ void Game::handleEvents()
 
 			case sf::Keyboard::S:
 				this->alg->setAlg(2);
+				break;
+
+			case sf::Keyboard::B:
+				this->alg->setAlg(3);
 				break;
 
 			case sf::Keyboard::Space:

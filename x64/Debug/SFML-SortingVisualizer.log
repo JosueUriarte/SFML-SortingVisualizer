@@ -1,2 +1,6 @@
-﻿  blocks.cpp
+﻿  algorithms.cpp
+C:\Users\Josue Uriarte\Desktop\SFML-SortingVisualizer\SFML-SortingVisualizer\src\algorithms.cpp(24,60): warning C4552: '%': result of expression not used
+  game.cpp
+  main.cpp
+  Generating Code...
   SFML-SortingVisualizer.vcxproj -> C:\Users\Josue Uriarte\Desktop\SFML-SortingVisualizer\SFML-SortingVisualizer\x64\Debug\SFML-SortingVisualizer.exe
