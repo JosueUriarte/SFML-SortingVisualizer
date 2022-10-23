@@ -21,7 +21,7 @@ void Algorithms::stop() {
 
 void Algorithms::setAlg(int algNum) {
 	if (algNum == -1) selectedAlg = (selectedAlg + 1) % algList.size();
-	else if (algNum == -2) (selectedAlg + algList.size() - 1) % algList.size();
+	else if (algNum == -2) selectedAlg = (selectedAlg + algList.size() - 1) % algList.size();
 	else selectedAlg = algNum;
 	std::cout << "ALGORITHM SELECTED: " << this->getAlg() << std::endl;
 }
@@ -54,6 +54,9 @@ void Algorithms::algo() {
 		break;
 	case 6:
 		Algorithms::cocktailSort();
+		break;
+	case 7:
+		Algorithms::quickSort();
 		break;
 	}
 	std::cout << "FINISHED THREAD...." << std::endl;
@@ -171,6 +174,35 @@ void Algorithms::cocktailSort() {
 }
 
 // QUICK SORT ---------------------------------------------------
+void Algorithms::quickSort() {
+	quickSortMain(0, this->blocks.num_blocks - 1);
+}
+
+void Algorithms::quickSortMain(int l_idx, int r_idx) {
+	if (l_idx < r_idx) {
+		int pi = partition(l_idx, r_idx);
+		quickSortMain(l_idx, pi - 1);
+		quickSortMain(pi + 1, r_idx);
+	}
+}
+
+int Algorithms::partition(int l_idx, int r_idx) {
+	int pivot = this->blocks[r_idx];
+	int i = l_idx - 1;
+
+	for (int j = l_idx; j < r_idx; j++)
+	{
+		if (this->blocks[j] <= pivot)
+		{
+			i++;
+			this->blocks.block_swap(i, j);
+		}
+	}
+
+	this->blocks.block_swap(i + 1, r_idx);
+	return (i + 1);
+}
+
 
 // MERGE SORT ---------------------------------------------------
 
