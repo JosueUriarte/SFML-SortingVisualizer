@@ -47,15 +47,18 @@ void Algorithms::algo() {
 		Algorithms::bubbleSort();
 		break;
 	case 4:
-		Algorithms::shellSort();
+		Algorithms::recursive_bubblesort();
 		break;
 	case 5:
-		Algorithms::gnomeSort();
+		Algorithms::shellSort();
 		break;
 	case 6:
-		Algorithms::cocktailSort();
+		Algorithms::gnomeSort();
 		break;
 	case 7:
+		Algorithms::cocktailSort();
+		break;
+	case 8:
 		Algorithms::quickSort();
 		break;
 	}
@@ -106,6 +109,27 @@ void Algorithms::bubbleSort() {
 		for(int j = 0; j < this->blocks.num_blocks - i - 1;j++)
 			if(this->blocks.cmp(j, j+1) == 1)
 				this->blocks.block_swap(j, j+1);
+}
+
+void r_bubblesort_main(Blocks& b_blocks, int n_blocks) {
+	if (n_blocks == 1) return;
+
+	int count = 0;
+
+	for (int i = 0; i < n_blocks - 1; i++)
+	{
+		if (b_blocks.cmp(i, i + 1) == 1) {
+			b_blocks.block_swap(i, i + 1);
+			count++;
+		}
+	}
+
+	if (count == 0) return;
+	r_bubblesort_main(b_blocks, n_blocks - 1);
+}
+
+void Algorithms::recursive_bubblesort() {
+	r_bubblesort_main(this->blocks, this->blocks.num_blocks);
 }
 
 // SHELL SORT ---------------------------------------------------
