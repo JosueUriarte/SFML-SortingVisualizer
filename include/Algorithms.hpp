@@ -50,4 +50,6 @@ private:
 	int partition(int l_idx, int r_idx);
 	void quickSortMain(int l_idx, int r_idx);
 	void quickSort();
+
+	void mergeSort();
 };

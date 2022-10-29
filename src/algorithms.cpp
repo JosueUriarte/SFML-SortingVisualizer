@@ -61,6 +61,9 @@ void Algorithms::algo() {
 	case 8:
 		Algorithms::quickSort();
 		break;
+	case 9:
+		Algorithms::mergeSort();
+		break;
 	}
 	std::cout << "FINISHED THREAD...." << std::endl;
 	working = false;
@@ -229,5 +232,8 @@ int Algorithms::partition(int l_idx, int r_idx) {
 
 
 // MERGE SORT ---------------------------------------------------
+void Algorithms::mergeSort() {
+
+}
 
 // RADIX SORT ---------------------------------------------------
