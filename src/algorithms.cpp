@@ -232,8 +232,70 @@ int Algorithms::partition(int l_idx, int r_idx) {
 
 
 // MERGE SORT ---------------------------------------------------
-void Algorithms::mergeSort() {
+void merge(Blocks& _blocks, int left, int mid, int right) {
+	auto subArrOne = mid - left + 1;
+	auto subArrTwo = right - mid;
 
+	// Create temp arr
+	auto*leftArray = new int[subArrOne],
+		*rightArray = new int[subArrTwo];
+
+	// Copy data to temp arr
+	for (int i = 0; i < subArrOne; i++)
+		leftArray[i] = _blocks[left + i];
+	for (int i = 0; i < subArrTwo; i++)
+		rightArray[i] = _blocks[mid + 1 + i];
+
+	int idxSubArrOne = 0;
+	int idxSubArrTwo = 0;
+	int idxMergedArr = left;
+
+	while (idxSubArrOne < subArrOne && idxSubArrTwo < subArrTwo)
+	{
+		if (leftArray[idxSubArrOne] <= rightArray[idxSubArrTwo])
+		{
+			_blocks(idxMergedArr, leftArray[idxSubArrOne]);
+			idxSubArrOne++;
+		}
+		else {
+			_blocks(idxMergedArr, rightArray[idxSubArrTwo]);
+			idxSubArrTwo++;
+		}
+		idxMergedArr++;
+	}
+
+	// Copy remaining left elements
+	while (idxSubArrOne < subArrOne)
+	{
+		_blocks(idxMergedArr, leftArray[idxSubArrOne]);
+		idxSubArrOne++;
+		idxMergedArr++;
+	}
+
+	// Copy remaining right elements
+	while (idxSubArrTwo < subArrTwo)
+	{
+		_blocks(idxMergedArr, rightArray[idxSubArrTwo]);
+		idxSubArrTwo++;
+		idxMergedArr++;
+	}
+
+	delete[] leftArray;
+	delete[] rightArray;
+}
+
+void main_merge_sort(Blocks& t_blocks, int begin, int end) {
+	if (begin >= end) // BASE CASE
+		return;
+
+	auto midpoint = begin + (end - begin) / 2;
+	main_merge_sort(t_blocks, begin, midpoint);
+	main_merge_sort(t_blocks, midpoint + 1, end);
+	merge(t_blocks, begin, midpoint, end);
+}
+
+void Algorithms::mergeSort() {
+	main_merge_sort(this->blocks, 0, this->blocks.num_blocks - 1);
 }
 
 // RADIX SORT ---------------------------------------------------
