@@ -64,6 +64,9 @@ void Algorithms::algo() {
 	case 9:
 		Algorithms::mergeSort();
 		break;
+	case 10:
+		Algorithms::radixSort();
+		break;
 	}
 	std::cout << "FINISHED THREAD...." << std::endl;
 	working = false;
@@ -299,3 +302,40 @@ void Algorithms::mergeSort() {
 }
 
 // RADIX SORT ---------------------------------------------------
+
+// Counting sort for the radix sort
+void countSort(Blocks& _blocks, int exp) {
+	int* output = new int[_blocks.num_blocks];
+	int i, count[10] = { 0 };
+
+	// Store count of occurrences in count[]
+	for (i = 0; i < _blocks.num_blocks; i++)
+		count[(_blocks[i] / exp) % 10]++;
+
+	// Change count[i] so that count[i] now contains actual
+	// position of this digit in output[]
+	for (i = 1; i < 10; i++)
+		count[i] += count[i - 1];
+
+	// Build the output array
+	for (i = _blocks.num_blocks - 1; i >= 0; i--)
+	{
+		output[count[(_blocks[i] / exp) % 10] - 1] = _blocks[i];
+		count[(_blocks[i] / exp) % 10]--;
+	}
+
+	// Copy the output array to _blocks[], so that _blocks[] now
+	// contains sorted numbers according to current digit
+	for (i = 0; i < _blocks.num_blocks; i++)
+		_blocks(i, output[i]);
+}
+
+void Algorithms::radixSort() {
+	int max = this->blocks[0];
+	for (int i = 1; i < this->blocks.num_blocks; i++)
+		if (this->blocks[i] > max)
+			max = this->blocks[i];
+
+	for (int exp = 1; max / exp > 0; exp *= 10)
+		countSort(this->blocks, exp);
+}
