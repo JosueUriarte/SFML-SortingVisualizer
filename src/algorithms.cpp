@@ -67,6 +67,11 @@ void Algorithms::algo() {
 	case 10:
 		Algorithms::radixSort();
 		break;
+	case 11:
+		Algorithms::heapSort();
+		break;
+	default:
+		break;
 	}
 	std::cout << "FINISHED THREAD...." << std::endl;
 	working = false;
@@ -338,4 +343,39 @@ void Algorithms::radixSort() {
 
 	for (int exp = 1; max / exp > 0; exp *= 10)
 		countSort(this->blocks, exp);
+}
+
+// HEAP SORT ---------------------------------------------------
+
+// heapify
+void heapify(Blocks& _blocks, int n, int i) {
+	int largest = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+
+	if (l < n && _blocks[l] > _blocks[largest])
+		largest = l;
+
+	if (r < n && _blocks[r] > _blocks[largest])
+		largest = r;
+
+	if (largest != i) {
+		_blocks.block_swap(i, largest);
+		heapify(_blocks, n, largest);
+	}
+}
+void Algorithms::heapSort() {
+	// Build heap (rearrange array)
+	for (int i = this->blocks.num_blocks / 2 - 1; i >= 0; i--)
+		heapify(this->blocks, this->blocks.num_blocks, i);
+
+	// One by one extract an element from heap
+	for (int i = this->blocks.num_blocks - 1; i >= 0; i--)
+	{
+		// Move current root to end
+		this->blocks.block_swap(0, i);
+
+		// call max heapify on the reduced heap
+		heapify(this->blocks, i, 0);
+	}
 }
