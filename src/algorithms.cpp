@@ -1,4 +1,7 @@
 #include "Algorithms.hpp"
+#include <random>
+#include <chrono>
+
 
 Algorithms::Algorithms(Blocks& _blocks):blocks(_blocks) {
 	working = false;
@@ -19,6 +22,7 @@ void Algorithms::stop() {
 	this->sortingThread.detach();
 }
 
+
 void Algorithms::setAlg(int algNum) {
 	if (algNum == -1) selectedAlg = (selectedAlg + 1) % algList.size();
 	else if (algNum == -2) selectedAlg = (selectedAlg + algList.size() - 1) % algList.size();
@@ -26,63 +30,36 @@ void Algorithms::setAlg(int algNum) {
 	std::cout << "ALGORITHM SELECTED: " << this->getAlg() << std::endl;
 }
 
+
 std::string Algorithms::getAlg() {
 	return algList[selectedAlg];
 }
 
 void Algorithms::algo() {
 	std::cout << "STARTING THREAD...." << sortingThread.get_id() << std::endl;
-	switch (selectedAlg)
-	{
-	case 0:
-		Algorithms::shuffle();
-		break;
-	case 1:
-		Algorithms::insertionSort();
-		break;
-	case 2:
-		Algorithms::selectionSort();
-		break;
-	case 3:
-		Algorithms::bubbleSort();
-		break;
-	case 4:
-		Algorithms::recursive_bubblesort();
-		break;
-	case 5:
-		Algorithms::shellSort();
-		break;
-	case 6:
-		Algorithms::gnomeSort();
-		break;
-	case 7:
-		Algorithms::cocktailSort();
-		break;
-	case 8:
-		Algorithms::quickSort();
-		break;
-	case 9:
-		Algorithms::mergeSort();
-		break;
-	case 10:
-		Algorithms::radixSort();
-		break;
-	case 11:
-		Algorithms::heapSort();
-		break;
-	default:
-		break;
-	}
+	if (selectedAlg == 0) shuffle();
+	else if (selectedAlg == 1) insertionSort();
+	else if (selectedAlg == 2) selectionSort();
+	else if (selectedAlg == 3) bubbleSort();
+	else if (selectedAlg == 4) recursive_bubblesort();
+	else if (selectedAlg == 5) shellSort();
+	else if (selectedAlg == 6) gnomeSort();
+	else if (selectedAlg == 7) cocktailSort();
+	else if (selectedAlg == 8) quickSort();
+	else if (selectedAlg == 9) mergeSort();
+	else if (selectedAlg == 10) radixSort();
+	else if (selectedAlg == 11) heapSort();
 	std::cout << "FINISHED THREAD...." << std::endl;
 	working = false;
 }
 
 // ALGORITHMS //////////////////////////////////////////////////////////
 
-// SHUFFLE -----------------------------------------------------
+// SHUFFLE BLOCKS -----------------------------------------------------
 void Algorithms::shuffle() {
-	std::random_shuffle(blocks.blockSize.begin(), blocks.blockSize.end());
-	sorted = false;
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::shuffle(blocks.blockSize.begin(), blocks.blockSize.end(), g);
 }
 
 // INSERTION SORT ----------------------------------------------
@@ -346,7 +323,6 @@ void Algorithms::radixSort() {
 }
 
 // HEAP SORT ---------------------------------------------------
-
 // heapify
 void heapify(Blocks& _blocks, int n, int i) {
 	int largest = i;
