@@ -11,7 +11,7 @@ Cocktail Sort,
 Quick Sort,
 Radix Sort
 
-# How to use program
+# How to use
 
 Controls:
 - Up and down arrows - Choosing algorithm
