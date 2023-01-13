@@ -9,7 +9,8 @@ Shell Sort,
 Gnome Sort,
 Cocktail Sort,
 Quick Sort,
-Radix Sort
+Radix Sort,
+Heap Sort
 
 # How to use
 
