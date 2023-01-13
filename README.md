@@ -1,7 +1,7 @@
 # SFML-SortingVisualizer
 Sorting visualizer (Like from those youtube vids) made with SFML.
 
-Algorithms\n
+Algorithms
 Insertion Sort
 Selection Sort
 Bubble Sort
